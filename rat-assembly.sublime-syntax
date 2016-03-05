@@ -1,0 +1,50 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+name: Rat-asm
+file_extensions:
+  - asm
+scope: source.asm
+contexts:
+  main:
+    - match: ;.*
+      comment: Comment format ;
+      scope: comment.line
+
+    - match: '\b[rR](([0-2]?[0-9])|(3[0-1]))\b'
+      comment: 32 registers are available.
+      scope: storage.type.registers
+    
+    # - match: '(\b[a-zA-Z]{2}\b)|(\b[a-zA-Z]{3}\b)|(\b[a-zA-Z]{4}\b)' #lazy syntax matches all 2,3 and 4 char words as commands.
+
+    - match: '\b(([bB][rR][nN][eE]?)|([bB][rR][cC]([cC]|[sS]))|([bB][rR][eE][qQ])|([cC][aA][lL][lL])|(([rR][eE][tT])([iI]([dD]|[eE]))?))\b'
+      comment: control statements.
+      scope: keyword.control
+
+    - match: '\b(([aA][dD][dD][cC]?)|([aA][nN][dD])|([aA][sS][rR])|([cC][mM][pP])|([eE][xX][oO][rR])|([lL][sS]([lL]|[rR]))|([mM][oO][vV])|([oO][rR])|([rR][oO]([lL]|[rR]))|([sS][uU][bB][cC]?)|([tT][eE][sS][tT]))\b'
+      comment: arithmetic operations
+      scope: keyword.operators
+
+    - match: '\b(([cC][lL]([cC]|[iI]))|([sS][eE]([cC]|[iI])))\b'
+      comment: flag manipulators
+      scope: keyword.operators.flags
+
+    - match: '\b(([lL][dD])|([pP][oO][pP])|([pP][uU][sS][hH])|([sS][tT])|([wW][sS][pP]))\b'
+      comment: stack modifiers
+      scope: keyword.stack
+
+    - match: '\b(([iI][nN])|([oO][uU][tT]))\b'
+      comment: input and output
+      scope: keyword.IO
+
+    - match: '0x[0-3]?[0-9A-F]{2}\b'
+      comment: Hexadecimal numbers
+      scope: constant.numeric.hex
+    
+    - match: '([\w]+:)|((?<=([bB][rR][nN]))([\s])[\s]*[\w]+\b)|((?<=([bB][rR]([nN]|[eE]|[cC])([cC]|[eE]|[qQ]|[sS])))([\s])[\s]*[\w]+\b)|((?<=([cC][aA][lL][lL]))([\s])[\s]*[\w]+\b)'
+      comment: Labels #second part of this looks for text following a branch stament. It uses some shortcuts that may match invalid commands like BRCQ
+      scope: entity.name.section
+
+    - match: '\.(([oO][rR][gG])|([eE][qQ][uU])|[cCdD][sS][eE][gG]|([dD][bB])|([bB][yY][tT][eE])|([dD][eE][fF]))'
+      comment: Directive format
+      scope: entity.name.function.directives
