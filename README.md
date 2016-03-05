@@ -1,6 +1,6 @@
 # Rat-asm
 
-Rat assemmbly syntax highlighter
+Rat assembly syntax highlighter for Sublime Text.
 
 Made for use with the Rat MCU created in the Cal Poly digital design course, CPE233.
 
