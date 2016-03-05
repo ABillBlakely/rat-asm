@@ -7,7 +7,7 @@ Made for use with the Rat MCU created in the Cal Poly digital design course, CPE
 #### Installation
 
 To install:
-* Go to menu tools->new syntax.
+* Go to menu "Tools->New Syntax".
 * Copy and paste the file in.
 * Save with appropriate file name.
 
